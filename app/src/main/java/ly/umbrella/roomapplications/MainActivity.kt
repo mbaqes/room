@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.room.Room
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
@@ -19,27 +21,21 @@ import ly.umbrella.roomapplications.data.entity.UserEntity
 import ly.umbrella.roomapplications.data.repository.LocalUserRepositoryImp
 
 class MainActivity : AppCompatActivity() {
-
+     private val vmUser:UserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
          UserDb.initDb(this)
-        GlobalScope.launch {
+       val observer=Observer<Recourc<List<UserEntity>>>{
+           when(it){
+               is Recourc.Success<List<UserEntity>>-> {
+                   Log.d("state" ,it.data!!.first().toString())
+               }
+           }
 
-              var reposity = LocalUserRepositoryImp()
-            reposity.insertUser(UserEntity(name = "Mailk", id = 0, phonNumber = "525555"))
-            reposity.getallUSer().onEach {
-             when(it){
-                 is Recourc.Success<List<UserEntity>> -> {
-                     Log.d("ff",it.data!!.first().name)
-                 }
-                 else ->{
-
-                 }
-             }
-            }.launchIn(this)
-
-        }
+       }
+       vmUser.state.observe(this,observer)
+        vmUser.getUsers()
 
     }
 }

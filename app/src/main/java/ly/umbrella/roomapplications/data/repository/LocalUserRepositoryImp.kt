@@ -11,7 +11,6 @@ class LocalUserRepositoryImp:LocalUserRepository {
     override suspend fun getallUSer(): Flow<Recourc<List<UserEntity>>> {
         return flow {
             emit(Recourc.Loading<List<UserEntity>>())
-
          var listuser= database.getuserDao().getallUser()
             emit(Recourc.Success<List<UserEntity>>(data = listuser.map { it.converToEntity() }))
         }
