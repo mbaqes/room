@@ -8,12 +8,13 @@ import ly.umbrella.roomapplications.data.entity.UserEntity
 
 class LocalUserRepositoryImp:LocalUserRepository {
   private  var database =UserDb.initDb(null)
-    override suspend fun getallUSer(): Flow<Recourc<List<UserEntity>>> {
+    override  fun getallUSer(): Flow<Recourc<List<UserEntity>>> {
         return flow {
             emit(Recourc.Loading<List<UserEntity>>())
          var listuser= database.getuserDao().getallUser()
             emit(Recourc.Success<List<UserEntity>>(data = listuser.map { it.converToEntity() }))
         }
+
     }
 
     override fun insertUser(user: UserEntity) {
