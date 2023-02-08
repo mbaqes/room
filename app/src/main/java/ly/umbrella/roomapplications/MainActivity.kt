@@ -12,9 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
-import io.konform.validation.Validation
-import io.konform.validation.jsonschema.maxLength
-import io.konform.validation.jsonschema.minLength
+
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -36,18 +34,17 @@ class MainActivity : AppCompatActivity(),ClickItem {
          UserDb.initDb(this)
         initUi()
        val observer=Observer<Recourc<List<UserEntity>>>{
-           when(it){
-               is Recourc.Loading<List<UserEntity>>-> {
-                   // UI
-               }
-               is Recourc.Success<List<UserEntity>>-> {
-
-                   userAdapter.fillUserList(it.data!!)
-               }
-           }
+//           when(it){
+//               is Recourc.Loading<List<UserEntity>>-> {
+//                   // UI
+//               }
+//               is Recourc.Success<List<UserEntity>>-> {
+//
+//                   userAdapter.fillUserList(it.data!!)
+//               }
+//           }
 
        }
-
        vmUser.state.observe(this,observer)
         vmUser.insertUser()
         vmUser.getUsers()
