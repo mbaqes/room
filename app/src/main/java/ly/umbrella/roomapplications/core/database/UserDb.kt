@@ -17,7 +17,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 abstract class UserDb:RoomDatabase() {
     abstract fun getuserDao(): UserDao
     companion object{
+        @Volatile
         private var database:UserDb? =null
+
         fun initDb(context: Context?):UserDb{
             if(database==null){
                 synchronized(this){

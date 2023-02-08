@@ -5,7 +5,7 @@ import ly.umbrella.roomapplications.core.Recourc
 import ly.umbrella.roomapplications.data.entity.UserEntity
 
 interface LocalUserRepository {
-    fun getallUSer(): Flow<Recourc<List<UserEntity>>>
-   fun insertUser(user:UserEntity)
+    suspend fun getallUSer(): Flow<Recourc<List<UserEntity>>>
+ suspend  fun insertUser(user:UserEntity)
 
 }
