@@ -24,46 +24,81 @@ import ly.umbrella.roomapplications.core.database.UserDbModel
 import ly.umbrella.roomapplications.data.entity.UserEntity
  import ly.umbrella.roomapplications.views.ProfileActivity
 
-class MainActivity : AppCompatActivity(),ClickItem {
-     private val vmUser:UserViewModel by viewModels()
-     private lateinit var userAdapter :UserAdapter
-     private lateinit var rvListUser:RecyclerView
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-         UserDb.initDb(this)
-        initUi()
-       val observer=Observer<Recourc<List<UserEntity>>>{
-//           when(it){
-//               is Recourc.Loading<List<UserEntity>>-> {
-//                   // UI
-//               }
-//               is Recourc.Success<List<UserEntity>>-> {
-//
-//                   userAdapter.fillUserList(it.data!!)
-//               }
-//           }
 
-       }
-       vmUser.state.observe(this,observer)
-        vmUser.insertUser()
-        vmUser.getUsers()
 
 
     }
 
-    override fun onUserClickItem(user: UserEntity) {
-        val intent = Intent(this, ProfileActivity::class.java)
-        intent.putExtra("user",user)
-    }
-    fun initUi(){
-        userAdapter = UserAdapter(ArrayList())
-        userAdapter.clickListItem=this
-        rvListUser.adapter=userAdapter
-        rvListUser.layoutManager=LinearLayoutManager(this)
 
-    }
-    fun fillUserList(){
 
+
+}
+suspend fun timer(){
+    for (i in 1..10){
+        Log.d("main"," Timer --- >> $i")
     }
 }
+
+//Flow  su
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//         UserDb.initDb(this)
+//        initUi()
+//       val observer=Observer<Recourc<List<UserEntity>>>{
+////           when(it){
+////               is Recourc.Loading<List<UserEntity>>-> {
+////                   // UI
+////               }
+////               is Recourc.Success<List<UserEntity>>-> {
+////
+////                   userAdapter.fillUserList(it.data!!)
+////               }
+////           }
+//
+//       }
+//       vmUser.state.observe(this,observer)
+//        vmUser.insertUser()
+//        vmUser.getUsers()
+//
+//
+//    }
+//
+//    override fun onUserClickItem(user: UserEntity) {
+//        val intent = Intent(this, ProfileActivity::class.java)
+//        intent.putExtra("user",user)
+//    }
+//    fun initUi(){
+//        userAdapter = UserAdapter(ArrayList())
+//        userAdapter.clickListItem=this
+//        rvListUser.adapter=userAdapter
+//        rvListUser.layoutManager=LinearLayoutManager(this)
+//
+//    }
+//    fun fillUserList(){
+//
+//    }
+//}
